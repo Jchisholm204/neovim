@@ -15,21 +15,15 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local plugins = {
-    -- Search
-    {
-        'nvim-telescope/telescope.nvim',
-        tag = '0.1.5',
-        dependencies = { {'nvim-lua/plenary.nvim'} }
-    },
-    -- Syntax highlighting
-    {
-        'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate'
-    },
-    { "catppuccin/nvim", name = "catppuccin", priority = 1000 }
-}
-
-local opts = {}
-
-require("lazy").setup(plugins, opts)
+-- Setup lazy.nvim
+require("lazy").setup({
+  spec = {
+    -- import your plugins
+    { import = "plugins" },
+  },
+  -- Configure any other settings here. See the documentation for more details.
+  -- colorscheme that will be used when installing plugins.
+  install = { colorscheme = { "habamax" } },
+  -- automatically check for plugin updates
+  checker = { enabled = true },
+})

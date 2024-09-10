@@ -1,14 +1,24 @@
-require'nvim-treesitter.configs'.setup {
-  -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  ensure_installed = { "c", "lua", "vim" },
+return {
+    'nvim-treesitter/nvim-treesitter',
+    cmd = {'TSUpdate', 'TSInstall'},
+    build = ':TSUpdate',
+    lazy = vim.fn.argc(-1) == 0,
+    branch = 'main',
+    config = function()
 
-  sync_install = false,
+        require'nvim-treesitter.configs'.setup {
+            -- A list of parser names, or "all" (the five listed parsers should always be installed)
+            ensure_installed = { "c", "lua", "vim" },
 
-  auto_install = true,
+            sync_install = false,
+
+            auto_install = true,
 
 
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = false,
-  },
+            highlight = {
+                enable = true,
+                additional_vim_regex_highlighting = false,
+            },
+        }
+    end
 }
