@@ -27,26 +27,7 @@ local plugins = {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'
     },
-    'nvim-treesitter/playground',
-    -- File Jumper (Super usefull)
-    'theprimeagen/harpoon',
-    -- Autopair brackets plugin
-    'windwp/nvim-autopairs',
-    -- Doxygen Comment
-    {
-        "danymat/neogen",
-	    dependencies = "nvim-treesitter/nvim-treesitter",
-    },
-    -- Code alignment plugin
-    'junegunn/vim-easy-align',
-    -- Bottom bar plugin
-    {
-        'nvim-lualine/lualine.nvim',
-        dependencies = { { 'nvim-tree/nvim-web-devicons' } }
-    },
-    -- Block comment plugin
-        'numToStr/Comment.nvim'
-
+    { "catppuccin/nvim", name = "catppuccin", priority = 1000 }
 }
 
 local opts = {}
