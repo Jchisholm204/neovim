@@ -26,7 +26,7 @@ return {
                 'clangd',
                 'cmake',
                 'rust_analyzer',
-                'bash',
+                'bashls',
             },
             -- for the love of god I dont want to worry about this
             automatic_installation = true,
