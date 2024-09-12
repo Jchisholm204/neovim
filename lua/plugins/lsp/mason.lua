@@ -23,10 +23,23 @@ return {
         mason_lspconfig.setup({
             ensure_installed = {
                 'lua_ls',
+                -- C/C++ Languager Servers
                 'clangd',
                 'cmake',
+                'arduino_language_server',
+                -- Rust
                 'rust_analyzer',
+                -- Bash
                 'bashls',
+                -- Assembly Language LSP
+                'asm_lsp',
+                -- Latex LSP
+                'ltex',
+                -- 'bufls',
+                -- VHDL/Verilog/SystemV LSP
+                'hdl_checker',
+                -- Python LSP
+                'pylsp',
             },
             -- for the love of god I dont want to worry about this
             automatic_installation = true,
