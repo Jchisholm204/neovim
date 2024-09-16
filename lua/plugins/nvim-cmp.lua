@@ -18,7 +18,7 @@ return {
         "rafamadriz/friendly-snippets", -- useful snippets
         "onsails/lspkind.nvim", -- vs-code like pictograms
     },
-    
+
     config = function()
         local cmp = require("cmp")
         local luasnip = require("luasnip")
@@ -46,6 +46,9 @@ return {
                 { name = "buffer" }, -- text within current buffer
                 { name = "path" }, -- file system paths
             }),
+            window = {
+                documentation = cmp.config.window.bordered(),
+            },
         })
     end
 }
