@@ -12,25 +12,27 @@ vim.o.shiftwidth = 4
 -- Enable Line Numbers
 vim.o.number = true
 
-vim.api.nvim_create_user_command("CHeader", function()
-  local filename = vim.fn.expand("%:t")
-  local date = os.date("%Y-%m-%d")
-  local year = os.date("%Y")
-  local lines = {
-    "/**",
-    " * @file " .. filename,
-    " * @author Jacob Chisholm (https://Jchisholm204.github.io)",
-    " * @brief ",
-    " * @version 0.1",
-    " * @date Created: " .. date,
-    " * @modified Last Modified: " .. date,
-    " *",
-    " * @copyright Copyright (c) " .. year,
-    " */",
-    ""
-  }
-  vim.api.nvim_buf_set_lines(0, 0, 0, false, lines)
-end, {})
+local function insert_c_header()
+    local filename = vim.fn.expand("%:t")
+    local date = os.date("%Y-%m-%d")
+    local year = os.date("%Y")
+    local lines = {
+        "/**",
+        " * @file " .. filename,
+        " * @author Jacob Chisholm (https://Jchisholm204.github.io)",
+        " * @brief ",
+        " * @version 0.1",
+        " * @date Created: " .. date,
+        " * @modified Last Modified: " .. date,
+        " *",
+        " * @copyright Copyright (c) " .. year,
+        " */",
+        ""
+    }
+    vim.api.nvim_buf_set_lines(0, 0, 0, false, lines)
+end
+
+vim.api.nvim_create_user_command("CHeader", insert_c_header, {})
 
 
 vim.api.nvim_create_user_command("UpdateCHeader", function()
@@ -56,3 +58,30 @@ vim.api.nvim_create_user_command("UpdateCHeader", function()
   vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
 end, {})
 
+vim.api.nvim_create_user_command("SVpackage", function()
+  local filename = vim.fn.expand("%:t")
+  local lines = {
+    "`timescale 1ns/100ps",
+    "package " .. filename:sub(1, -4) .. ";",
+    "",
+    "",
+    "endpackage"
+  }
+  vim.api.nvim_buf_set_lines(0, 0, 0, true, lines)
+  insert_c_header()
+end, {})
+
+vim.api.nvim_create_user_command("SVmodule", function()
+  local filename = vim.fn.expand("%:t")
+  local lines = {
+    "`timescale 1ns/100ps",
+    "module " .. filename:sub(1, -4) .. "(",
+    "    input logic iClk, nRst",
+    "    ",
+    ");",
+    "",
+    "endmodule"
+  }
+  vim.api.nvim_buf_set_lines(0, 0, 0, true, lines)
+  insert_c_header()
+end, {})
