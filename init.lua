@@ -5,4 +5,3 @@ require("config.lazy")
 vim.o.number = true
 vim.g.python3_host_prog = '/bin/python3.10'
 
-
