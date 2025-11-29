@@ -1,6 +1,8 @@
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("n", "<leader>h", vim.lsp.buf.hover)
+-- format the file
+vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 -- Jump to definition
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)
 
