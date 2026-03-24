@@ -38,52 +38,52 @@ vim.api.nvim_create_user_command("CHeader", insert_c_header, {})
 
 
 vim.api.nvim_create_user_command("UpdateCHeader", function()
-  local buf = vim.api.nvim_get_current_buf()
-  local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
-  local date = os.date("%Y-%m-%d")
+    local buf = vim.api.nvim_get_current_buf()
+    local lines = vim.api.nvim_buf_get_lines(buf, 0, -1, false)
+    local date = os.date("%Y-%m-%d")
 
-  for idx, line in ipairs(lines) do
-    -- update @modified
-    if line:match("@modified") then
-      lines[idx] = line:gsub("@modified.*", "@modified Last Modified: " .. date)
+    for idx, line in ipairs(lines) do
+        -- update @modified
+        if line:match("@modified") then
+            lines[idx] = line:gsub("@modified.*", "@modified Last Modified: " .. date)
+        end
+        -- optionally bump version
+        if line:match("@version") then
+            local major, minor = line:match("(%d+)%.(%d+)")
+            if major and minor then
+                minor = tonumber(minor) + 1
+                lines[idx] = line:gsub("@version.*", "@version " .. major .. "." .. minor)
+            end
+        end
     end
-    -- optionally bump version
-    if line:match("@version") then
-      local major, minor = line:match("(%d+)%.(%d+)")
-      if major and minor then
-        minor = tonumber(minor) + 1
-        lines[idx] = line:gsub("@version.*", "@version " .. major .. "." .. minor)
-      end
-    end
-  end
 
-  vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
+    vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
 end, {})
 
 vim.api.nvim_create_user_command("SVpackage", function()
-  local filename = vim.fn.expand("%:t")
-  local lines = {
-    "`timescale 1ns/100ps",
-    "package " .. filename:sub(1, -4) .. ";",
-    "",
-    "",
-    "endpackage"
-  }
-  vim.api.nvim_buf_set_lines(0, 0, 0, true, lines)
-  insert_c_header()
+    local filename = vim.fn.expand("%:t")
+    local lines = {
+        "`timescale 1ns/100ps",
+        "package " .. filename:sub(1, -4) .. ";",
+        "",
+        "",
+        "endpackage"
+    }
+    vim.api.nvim_buf_set_lines(0, 0, 0, true, lines)
+    insert_c_header()
 end, {})
 
 vim.api.nvim_create_user_command("SVmodule", function()
-  local filename = vim.fn.expand("%:t")
-  local lines = {
-    "`timescale 1ns/100ps",
-    "module " .. filename:sub(1, -4) .. "(",
-    "    input logic iClk, nRst",
-    "    ",
-    ");",
-    "",
-    "endmodule"
-  }
-  vim.api.nvim_buf_set_lines(0, 0, 0, true, lines)
-  insert_c_header()
+    local filename = vim.fn.expand("%:t")
+    local lines = {
+        "`timescale 1ns/100ps",
+        "module " .. filename:sub(1, -4) .. "(",
+        "    input logic iClk, nRst",
+        "    ",
+        ");",
+        "",
+        "endmodule"
+    }
+    vim.api.nvim_buf_set_lines(0, 0, 0, true, lines)
+    insert_c_header()
 end, {})

@@ -4,4 +4,6 @@ require("config.lazy")
 -- Enable Line Numbers
 vim.o.number = true
 vim.g.python3_host_prog = '/bin/python3.10'
+-- Enable Title Bar
+vim.opt.title = true
 
