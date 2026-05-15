@@ -77,8 +77,6 @@ return {
             -- format_on_save = true,
         })
 
-        -- require'plugins.lsp.setup_systemverilog'.setupLsp()
-
         vim.diagnostic.config({
             update_in_insert = true,
         })

@@ -1,6 +1,7 @@
 -- treesitter.lua
 return {
     'nvim-treesitter/nvim-treesitter',
+    branch='master',
     run = ':TSUpdate', -- Automatically update parsers on install
     config = function()
         require('nvim-treesitter.configs').setup {
